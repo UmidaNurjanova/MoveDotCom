@@ -1,4 +1,5 @@
-/** Java program that prints out to the user all the anagrams to his input word. */
+/** Java program that takes in as input name of the dictionary file and 
+ *  prints out to the user all the anagrams to his input word. */
 
 package AnagramPackage;
 import java.util.ArrayList;
@@ -11,8 +12,10 @@ import java.io.FileNotFoundException;
 
 public class Anagram {
 	
-/*Helper Methods Implementation */	
-	//StringSorter//
+/*Function  Implementations */	
+/** Function String Sorter that takes in one parameter 
+ *  @param a string, reorders the chars in the string to be in alphabetical order and
+ *  @ return a new string with chars in alphabetical order.*/
 	public static String StringSorter(String str) {
 		char sortArray[] = (str.toLowerCase()).toCharArray();
 		Arrays.sort(sortArray);
@@ -58,29 +61,35 @@ public class Anagram {
 			else map.put(alphOrdered, dictionaryList.get(i));		
 		}
 		
-		
-		/* Prompt to the user and save the user input as a string */
-		System.out.println("Enter a word whose anagrams you want to find:");
+	
+		System.out.println("Enter a word (or e to exit the program):");
+		System.out.println();
 		Scanner s = new Scanner(System.in);
 		String userInput = s.nextLine();
-	
 		
-		/*Call AnagramFinder method on the string saved from the user input. */
-		String out = AnagramFinder(userInput, map);
-		String count[] = out.split(",");
-		
-		long end = System.currentTimeMillis(); 
-		long duration = end - start;
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		if (out != null)
-		{
-			System.out.println(count.length + " anagrams found in " + duration + " ms." );
-			System.out.println(out);
+		while ( !(userInput.equalsIgnoreCase("e")) ) {
+			
+			String out = AnagramFinder(userInput, map);
+			String count[] = out.split(",");	
+			long end = System.currentTimeMillis(); 
+			long duration = end - start;
+			if (out != null)
+			{
+				System.out.println(count.length + " anagrams found in " + duration + " ms." );
+				System.out.println(out);
+			}
+			else System.out.println("No anagrams found for " + userInput + " in " + duration + "ms,");
+			userInput = s.nextLine();
+			
+			if (userInput.equalsIgnoreCase("e"))
+			{
+				System.out.println("Program Ended!");
+			}
 		}
-		else System.out.println("No anagrams for " + userInput);
+	
+
+		
 	
 	}// end of main
-	
 }// end of class Anagram
 
