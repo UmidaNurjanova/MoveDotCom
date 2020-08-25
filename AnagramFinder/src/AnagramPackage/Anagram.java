@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Anagram {
 	
@@ -34,21 +35,20 @@ public class Anagram {
 		return result;
 	}
 	
-	
 		
 /*Driver method */
-	public static void main(String[] args) throws FileNotFoundException  {
+	public static void main(String[] args) throws FileNotFoundException, IOException  {
 		
 		long start = System.currentTimeMillis(); 
 		
-		File f = new File("C:\\Users\\uinur\\Desktop\\dictionary.txt"); // need to change the filepath to filename later
+		File f = new File("dictionary"); 
 		Scanner s2 = new Scanner(f);
-		
 		ArrayList<String> dictionaryList = new ArrayList<String>();	
 		while(s2.hasNextLine()) {
 			dictionaryList.add(s2.nextLine());
 		}
-		
+		 s2.close();
+    
 		HashMap<String, String> map = new HashMap<>();
 		String alphOrdered = null;
 		for (int i = 0; i < dictionaryList.size(); i++ )
