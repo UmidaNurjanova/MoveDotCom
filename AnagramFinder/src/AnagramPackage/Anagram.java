@@ -33,46 +33,56 @@ public class Anagram {
 		String result = dictionary.get(s1_sorted);	
 		return result;
 	}
+	
+	
 		
 /*Driver method */
 	public static void main(String[] args) throws FileNotFoundException  {
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		long start = System.currentTimeMillis(); 
 		
-		//Read in file line by line and save lines in a String ArrayList. //
 		File f = new File("C:\\Users\\uinur\\Desktop\\dictionary.txt"); // need to change the filepath to filename later
 		Scanner s2 = new Scanner(f);
 		
-		ArrayList<String> dictionaryList = new ArrayList<String>();
-		
-		HashMap<String, String> map = new HashMap<>();
-		while( s2.hasNextLine() )
-		{
+		ArrayList<String> dictionaryList = new ArrayList<String>();	
+		while(s2.hasNextLine()) {
 			dictionaryList.add(s2.nextLine());
 		}
-		//Traverse through dictionary List and write them into HashMap 
-		//as key(word's alphabeticallyOrdered version) and as value(current word at i).
+		
+		HashMap<String, String> map = new HashMap<>();
 		String alphOrdered = null;
 		for (int i = 0; i < dictionaryList.size(); i++ )
 		{
 			alphOrdered = StringSorter(dictionaryList.get(i));
-			if(map.get(alphOrdered) != null) map.put(alphOrdered, map.get(alphOrdered) + ", " + dictionaryList.get(i));
-			else map.put(alphOrdered, dictionaryList.get(i));		
+			
+			if(map.get(alphOrdered) != null) {
+				map.put(alphOrdered, map.get(alphOrdered) + ", " + dictionaryList.get(i));
+			}
+			else
+			{
+				map.put(alphOrdered, dictionaryList.get(i));	
+			}
 		}
 		
-	
 		System.out.println("Enter a word (or e to exit the program):");
 		System.out.println();
 		Scanner s = new Scanner(System.in);
 		String userInput = s.nextLine();
 		
+		if (userInput.equalsIgnoreCase("e"))
+		{
+			System.out.println("Program Ended!");
+		}
+		
 		while ( !(userInput.equalsIgnoreCase("e")) ) {
 			
 			String out = AnagramFinder(userInput, map);
-			String count[] = out.split(",");	
+			String count[] = out.split(",");
+			
+			
 			long end = System.currentTimeMillis(); 
 			long duration = end - start;
+			
 			if (out != null)
 			{
 				System.out.println(count.length + " anagrams found in " + duration + " ms." );
