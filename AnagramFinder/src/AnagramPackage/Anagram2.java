@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Anagram {
+public class Anagram2 {
 	
 /*Function  Implementations */	
 /** Function String Sorter that takes in one parameter 
